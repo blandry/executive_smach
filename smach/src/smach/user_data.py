@@ -84,7 +84,7 @@ class UserData(object):
 def get_const(obj):
     """Get a const reference to an object if it has "user-defined" attributes."""
     if hasattr(obj,'__dict__'):
-        smach.logdebug("Making const '%s'" % str(obj))
+        # smach.logdebug("Making const '%s'" % str(obj))
         return Const(obj)
     else:
         return obj
@@ -96,17 +96,17 @@ class Const(object):
     but not as output keys.
     """
     def __init__(self, obj):
-        smach.logdebug("Making const '%s'" % str(obj))
+        # smach.logdebug("Making const '%s'" % str(obj))
         self._obj = obj
         self.__initialized = True
 
     def __getattr__(self, name):
-        smach.logdebug("Getting '%s' from const wrapper." % name)
+        # smach.logdebug("Getting '%s' from const wrapper." % name)
         attr = getattr(self._obj,name)
         return get_const(attr)
 
     def __getitem__(self, name):
-        smach.logdebug("Getting '%s' from const wrapper." % name)
+        # smach.logdebug("Getting '%s' from const wrapper." % name)
         attr = self._obj[name]
         return get_const(attr)
 
